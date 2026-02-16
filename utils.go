@@ -24,7 +24,7 @@ func LoadDefaultPrivateKey() (string, error) {
 	data, err := os.ReadFile(keyPath)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return "", errors.New("private key file not found")
+			return "", nil // No default key available, return empty string without error
 		}
 		return "", fmt.Errorf("error reading private key file: %w", err)
 	}

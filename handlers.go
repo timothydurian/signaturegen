@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -29,7 +30,7 @@ func HandleGenerateSignature(w http.ResponseWriter, r *http.Request) {
 	if req.PrivateKey == "" {
 		defaultKey, err := LoadDefaultPrivateKey()
 		if err != nil {
-			respondWithError(w, http.StatusInternalServerError, "Private key not provided and default key not available")
+			respondWithError(w, http.StatusInternalServerError, fmt.Sprintf("Error loading default private key: %v", err))
 			return
 		}
 		req.PrivateKey = defaultKey
